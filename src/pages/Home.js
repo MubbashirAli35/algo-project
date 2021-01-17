@@ -2,10 +2,20 @@ import React, { useState } from 'react';
 import { Container, Row, Dropdown, Form, Button } from 'react-bootstrap';
 import './Home.css';
 
+const lcs = require('longest-common-subsequence');
+
 const Home = () => {
     const [problem, setProblem] = useState('Longest Common Subsequence');
-    const [input, setInput] = useState('');
+    const [input1, setInput1] = useState('');
+    const [input2, setInput2] = useState('');
     const [output, setOutput] = useState('');
+
+    const onSolvePressed = () => {
+        switch(problem) {
+            case 'Longest Common Subsequence':
+                setOutput(lcs(input1, input2, true));
+        }
+    }
 
     return(
         <Container className='p-0 main-container' fluid >
@@ -71,9 +81,17 @@ const Home = () => {
                     <Row style={{ height: '17%', display: 'flex', flexDirection: 'column',
                             alignItems: 'flex-start', justifyContent: 'space-around', alignSelf: 'flex-start',
                             width: '100%' }} >
-                        <p style={{ fontWeight: 'bold' }} >Enter your Input here</p>
+                        <p style={{ fontWeight: 'bold' }} >Enter your Input 1 here</p>
                         
-                        <Form.Control onChange={e => setInput(e.target.value)} />
+                        <Form.Control onChange={e => setInput1(e.target.value)} />
+                    </Row>
+
+                    <Row style={{ height: '17%', display: 'flex', flexDirection: 'column',
+                            alignItems: 'flex-start', justifyContent: 'space-around', alignSelf: 'flex-start',
+                            width: '100%' }} >
+                        <p style={{ fontWeight: 'bold' }} >Enter your Input 2 here (if required)</p>
+                        
+                        <Form.Control onChange={e => setInput2(e.target.value)} />
                     </Row>
 
                     <Row style={{ height: '17%', display: 'flex', flexDirection: 'column',
@@ -81,10 +99,10 @@ const Home = () => {
                             width: '100%' }} >
                         <p style={{ fontWeight: 'bold' }} >Output</p>
                         
-                        <Form.Control/>
+                        <Form.Control value={output} />
                     </Row>
 
-                    <Button style={{ width: '40%', opacity: 1 }} onClick={() => alert(input)} >
+                    <Button style={{ width: '40%', opacity: 1 }} onClick={() => onSolvePressed()} >
                         Solve!
                     </Button>
                 </Row>
