@@ -10,6 +10,7 @@
     "js-levenshtein": "^1.1.6",
     "js-longest-increasing-subsequence": "^1.1.2",
     "knapsack-js": "^1.0.2",
+    "linear-partitioning": "^0.3.2",
     "longest-common-subsequence": "^1.0.4",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",

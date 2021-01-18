@@ -6,6 +6,7 @@ const lcs = require('longest-common-subsequence');
 const levenshtein = require('js-levenshtein');
 // var knapsack = require('knapsack-js');
 const lis = require('js-longest-increasing-subsequence');
+const lp = require('linear-partitioning');
 
 const Home = () => {
     const [problem, setProblem] = useState('Longest Common Subsequence');
@@ -42,7 +43,8 @@ const Home = () => {
                 setOutput(knapsack.resolve(input1, items));*/
             case 'Longest Increasing Subsequence': {
                 for(let i = 0; i < input1.length; ++i)
-                    array.push(Number(input1[i]));                
+                    if(input1[i] !== ',')
+                        array.push(Number(input1[i]));                
                 
                     let temp = lis(array);
                 
@@ -51,6 +53,22 @@ const Home = () => {
                 });
 
                 setOutput(string);
+                break;
+            }
+
+            case 'Partition-problem': {
+                for(let i = 0; i < input1.length; ++i)
+                    if(input1[i] !== ',')
+                        array.push(Number(input1[i]));
+
+                let temp = lp(array, 3);
+
+                temp.forEach(element => {
+                    string += element.toString() + ', ';
+                });
+
+                setOutput(string);
+                // alert(input1);
                 break;
             }
         }
@@ -139,6 +157,10 @@ const Home = () => {
                                 <Dropdown.Item onSelect={(eventKey) => setInput1(eventKey)}
                                     eventKey={[1, 3, 2, 5, 7]} > 
                                     [1, 3, 2, 5, 7]
+                                </Dropdown.Item>
+                                <Dropdown.Item onSelect={(eventKey) => setInput1(eventKey)}
+                                    eventKey={[1,2,3,4,5,6,7,8,9]} > 
+                                    [1,2,3,4,5,6,7,8,9]
                                 </Dropdown.Item>
                                 
                             </Dropdown.Menu>
