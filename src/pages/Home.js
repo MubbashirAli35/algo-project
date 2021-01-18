@@ -4,12 +4,14 @@ import './Home.css';
 
 const lcs = require('longest-common-subsequence');
 const levenshtein = require('js-levenshtein');
-var knapsack = require('knapsack-js');
+// var knapsack = require('knapsack-js');
+const lis = require('js-longest-increasing-subsequence');
 
 const Home = () => {
     const [problem, setProblem] = useState('Longest Common Subsequence');
-    const [input1, setInput1] = useState('');
-    const [input2, setInput2] = useState('');
+    const [input1, setInput1] = useState('MUBBASHIR ALI');
+    const [input2, setInput2] = useState('MUBBASHIR ALI');
+    // const [array1, setArray1] = useState([1, 3, 2, 5, 7]);
     const [output, setOutput] = useState('');
     var items = [
         {"pear": 1},
@@ -25,13 +27,32 @@ const Home = () => {
       ];
 
     const onSolvePressed = () => {
+        let string = '';
+        let array = []
         switch(problem) {
-            case 'Longest Common Subsequence':
+            case 'Longest Common Subsequence': {
                 setOutput(lcs(input1, input2, true));
-            case 'Levenshtein Distance':
-                setOutput(levenshtein(input1,input2 )); 
+                break;
+            }
+            case 'Levenshtein Distance': {
+                setOutput(levenshtein(input1,input2)); 
+                break;
+            }
            /* case '0-1-knapsack-problem':
                 setOutput(knapsack.resolve(input1, items));*/
+            case 'Longest Increasing Subsequence': {
+                for(let i = 0; i < input1.length; ++i)
+                    array.push(Number(input1[i]));                
+                
+                    let temp = lis(array);
+                
+                temp.forEach(element => {
+                    string += element.toString() + ', ';
+                });
+
+                setOutput(string);
+                break;
+            }
         }
     }
 
@@ -99,9 +120,29 @@ const Home = () => {
                     <Row style={{ height: '17%', display: 'flex', flexDirection: 'column',
                             alignItems: 'flex-start', justifyContent: 'space-around', alignSelf: 'flex-start',
                             width: '100%' }} >
-                        <p style={{ fontWeight: 'bold' }} >Enter your Input 1 here</p>
+                        <p style={{ fontWeight: 'bold' }} >Select Input 1</p>
                         
-                        <Form.Control onChange={e => setInput1(e.target.value)} />
+                        <Dropdown>
+                            <Dropdown.Toggle>
+                                {input1}
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item onSelect={(eventKey) => setInput1(eventKey)}
+                                    eventKey='MUBBASHIR ALI' >
+                                    MUBBASHIR ALI
+                                </Dropdown.Item>
+                                <Dropdown.Item onSelect={(eventKey) => setInput1(eventKey)}
+                                    eventKey='MIIIBUUBBMMLLLMMMIIIRMUUUMMMIIILL' > 
+                                    MIIIBUUBBMMLLLMMMIIIRMUUUMMMIIILL
+                                </Dropdown.Item>
+                                <Dropdown.Item onSelect={(eventKey) => setInput1(eventKey)}
+                                    eventKey={[1, 3, 2, 5, 7]} > 
+                                    [1, 3, 2, 5, 7]
+                                </Dropdown.Item>
+                                
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </Row>
 
                     <Row style={{ height: '17%', display: 'flex', flexDirection: 'column',
@@ -109,7 +150,23 @@ const Home = () => {
                             width: '100%' }} >
                         <p style={{ fontWeight: 'bold' }} >Enter your Input 2 here (if required)</p>
                         
-                        <Form.Control onChange={e => setInput2(e.target.value)} />
+                        <Dropdown>
+                            <Dropdown.Toggle>
+                                {input2}
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item onSelect={(eventKey) => setInput2(eventKey)}
+                                    eventKey='MUBBASHIR ALI' >
+                                    MUBBASHIR ALI
+                                </Dropdown.Item>
+                                <Dropdown.Item onSelect={(eventKey) => setInput2(eventKey)}
+                                    eventKey='MIIIBUUBBMMLLLMMMIIIRMUUUMMMIIILL' > 
+                                    MIIIBUUBBMMLLLMMMIIIRMUUUMMMIIILL
+                                </Dropdown.Item>
+                                
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </Row>
 
                     <Row style={{ height: '17%', display: 'flex', flexDirection: 'column',
