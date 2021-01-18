@@ -3,17 +3,35 @@ import { Container, Row, Dropdown, Form, Button } from 'react-bootstrap';
 import './Home.css';
 
 const lcs = require('longest-common-subsequence');
+const levenshtein = require('js-levenshtein');
+var knapsack = require('knapsack-js');
 
 const Home = () => {
     const [problem, setProblem] = useState('Longest Common Subsequence');
     const [input1, setInput1] = useState('');
     const [input2, setInput2] = useState('');
     const [output, setOutput] = useState('');
+    var items = [
+        {"pear": 1},
+        {"apple": 7},
+        {"grape": 0},
+        {"banana": 2},
+        {"orange": "NA"},
+        {"strawberry": 4},
+        {"mandarin": null},
+        {"durian": 1},
+        {"peach": undefined},
+        {}
+      ];
 
     const onSolvePressed = () => {
         switch(problem) {
             case 'Longest Common Subsequence':
                 setOutput(lcs(input1, input2, true));
+            case 'Levenshtein Distance':
+                setOutput(levenshtein(input1,input2 )); 
+           /* case '0-1-knapsack-problem':
+                setOutput(knapsack.resolve(input1, items));*/
         }
     }
 
